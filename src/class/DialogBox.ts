@@ -31,11 +31,13 @@ export class DialogBox extends Phaser.GameObjects.Container {
     this.text = new Phaser.GameObjects.Text(this.scene, x - width/2 + padding, y - height/2 + padding, '', dialogBoxTextStyle);
     this.add(this.text)
 
+    // box
     this.actorNameBox = new Phaser.GameObjects.Rectangle(this.scene, x - width/2, y - height/2 - margin, 0, 40, 0x000000).setStrokeStyle(1, 0xffffff);
     this.actorNameBox.setOrigin(0, 1);
     this.actorNameBox.setVisible(false);
     this.add(this.actorNameBox);
 
+    // text
     this.actorNameText = new Phaser.GameObjects.Text(this.scene, x - width/2 + padding, y - height/2 - margin - 20, '', textStyle);
     this.actorNameText.setOrigin(0, 0.5);
     this.actorNameText.setVisible(false);

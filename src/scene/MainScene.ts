@@ -1,14 +1,33 @@
 import { DialogBox, DialogBoxConfig } from '../class/DialogBox';
+import { TimelinePlayer } from '../class/TimelinePlayer';
+import { Timeline } from '../type/Timeline';
+import { timelineData } from '../data/timeline';
 
 export class MainScene extends Phaser.Scene {
+  private timeline?: Timeline;
+
   constructor() {
     super('main');
   }
 
-  create() {
-    const {width, height} = this.game.canvas;
+  init(data: any) {
+    const timelineID = data.timelineID || 'start';
 
-    this.add.image(width/2, height/2, 'street');
+    if (!(timelineID in timelineData)) {
+      console.error(`[ERROR] タイムラインID[${timelineID}]は登録されていません`);
+      this.scene.start('title');
+      return;
+    }
+
+    this.timeline = timelineData[timelineID];
+  }
+
+  create() {
+    if (!this.timeline) {
+      return;
+    }
+
+    const {width, height} = this.game.canvas;
 
     // font
     const textStyle: Phaser.Types.GameObjects.Text.TextStyle = {
@@ -31,17 +50,8 @@ export class MainScene extends Phaser.Scene {
 
     const dialogBox = new DialogBox(this, dialogBoxConfig);
 
-    dialogBox.setText('クリックでエンディングへ▼');
-    dialogBox.setActorNameText('NAME');
+    const timelinePlayer = new TimelinePlayer(this, dialogBox, textStyle);
 
-    this.add.existing(dialogBox);
-
-    const zone = this.add.zone(width/2, height/2, width, height);
-    zone.setInteractive({
-      useHandCursor: true
-    });
-    zone.on('pointerdown', () => {
-      this.scene.start('ending');
-    });
+    timelinePlayer.start(this.timeline);
   }
 }
