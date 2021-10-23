@@ -1,5 +1,3 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -35,7 +33,9 @@ const config = {
     extensions: ['.ts', '.js']
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
     port: 3000,
     open: true
   }
