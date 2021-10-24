@@ -1,0 +1,29 @@
+name: Publish to GitHub Pages
+
+on:
+  push:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    # Setup Node.js
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.1.2
+      with:
+        node-version: '14.x'
+
+    # Install dependency
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build webpack
+      run: npx webpack
+
+    - name: Publish generated content to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages
+        folder: dist
