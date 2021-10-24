@@ -4,7 +4,7 @@ export class LoadingScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('logo', '//labs.phaser.io/assets/sprites/phaser3-logo.png');
+    this.load.image('logo', '//cdn.pixabay.com/photo/2021/09/23/09/01/swan-6649194_1280.jpg');
   }
 
   create() {
@@ -14,8 +14,8 @@ export class LoadingScene extends Phaser.Scene {
 
     this.add.text(width/2, height/2 + 60, 'Loading...').setOrigin(0.5);
 
-    this.load.image('street', 'assets/street.png');
-    this.load.image('robot', 'assets/robot.png');
+    this.load.image('street', '//cdn.pixabay.com/photo/2013/03/02/02/41/alley-89197_1280.jpg');
+    this.load.image('robot', '//cdn.pixabay.com/photo/2017/07/27/09/56/sphere-stone-2544690_1280.png');
 
     this.load.on('complete', () => {
       this.scene.start('title');
