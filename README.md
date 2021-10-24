@@ -1,7 +1,8 @@
-Learn phaser repository.
+Learn Phaser library.
 
 ## Run
 ```
+npm install
 npx webpack-dev-server
 ```
 
