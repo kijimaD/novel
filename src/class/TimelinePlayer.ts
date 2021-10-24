@@ -55,7 +55,7 @@ export class TimelinePlayer {
 
   // 前景クリア
   private clearForeground() {
-    this.foregroundLayer.removeAll();
+    this.foregroundLayer.removeAll(true);
   }
 
   // 選択肢ボタンリセット
