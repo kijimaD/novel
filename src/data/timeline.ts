@@ -4,6 +4,7 @@ export const timelineData: Timelines = {
   start: [
     {type: 'dialog', text: '・・・・・・'},
     {type: 'dialog', text: 'う、うーん・・・'},
+    {type: 'playSound', key: 'lock_click'},
     {type: 'setBackground', x: 400, y: 300, key: 'street'},
     {type: 'dialog', text: 'ここは・・・？'},
     {type: 'addForeground', x: 400, y: 300, key: 'robot'},
