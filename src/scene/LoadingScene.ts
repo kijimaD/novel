@@ -6,7 +6,9 @@ export class LoadingScene extends Phaser.Scene {
   preload() {
     this.load.image('logo', '//cdn.pixabay.com/photo/2021/09/23/09/01/swan-6649194_1280.jpg');
     this.load.image('street', '//cdn.pixabay.com/photo/2013/03/02/02/41/alley-89197_1280.jpg');
-    this.load.image('station', 'assets/station.png');
+    this.load.image('station', 'assets/image/station.png');
+    this.load.image('red', 'assets/image/red.png');
+
     this.load.audio('train', 'assets/sound/train.mp3')
     this.load.audio('lock_click', 'assets/sound/lock_click.wav')
   }
