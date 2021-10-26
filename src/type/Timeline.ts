@@ -27,6 +27,11 @@ type ClearForegroundEvent = {
   type: 'clearForeground'
 };
 
+type playSoundEvent = {
+  type: 'playSound',
+  key: string
+};
+
 // タイムライン遷移イベント
 type TimelineTransitionEvent = {
   type: 'timelineTransition',
@@ -47,4 +52,12 @@ type ChoiceEvent = {
 };
 
 // Timelineはイベントの配列
-export type Timeline = (DialogEvent|SetBackGroundEvent|AddForegroundEvent|ClearForegroundEvent|TimelineTransitionEvent|SceneTransitionEvent|ChoiceEvent)[];
+export type Timeline = (
+  DialogEvent|
+  SetBackGroundEvent|
+  AddForegroundEvent|
+  ClearForegroundEvent|
+  TimelineTransitionEvent|
+  playSoundEvent|
+  SceneTransitionEvent|
+  ChoiceEvent)[];

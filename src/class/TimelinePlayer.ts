@@ -58,6 +58,11 @@ export class TimelinePlayer {
     this.foregroundLayer.removeAll(true);
   }
 
+  // 効果音再生
+  private playSound(key:string) {
+    this.scene.sound.play(key);
+  }
+
   // 選択肢ボタンリセット
   private setChoiceButtons(choices: Choice[]) {
     if (choices.length === 0) {
@@ -133,6 +138,11 @@ export class TimelinePlayer {
 
       case 'clearForeground':
         this.clearForeground();
+        this.next();
+        break;
+
+      case 'playSound':
+        this.playSound(timelineEvent.key);
         this.next();
         break;
 

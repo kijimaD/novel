@@ -15,7 +15,9 @@ export class LoadingScene extends Phaser.Scene {
     this.add.text(width/2, height/2 + 60, 'Loading...').setOrigin(0.5);
 
     this.load.image('street', '//cdn.pixabay.com/photo/2013/03/02/02/41/alley-89197_1280.jpg');
-    this.load.image('robot', '//cdn.pixabay.com/photo/2017/07/27/09/56/sphere-stone-2544690_1280.png');
+    this.load.image('station', '../assets/station.png');
+    this.load.audio('train', '../assets/sound/train.mp3')
+    this.load.audio('lock_click', '../assets/sound/lock_click.wav')
 
     this.load.on('complete', () => {
       this.scene.start('title');
