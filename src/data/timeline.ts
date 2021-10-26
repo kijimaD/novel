@@ -2,56 +2,38 @@ import { Timelines } from '../type/Timelines';
 
 export const timelineData: Timelines = {
   start: [
-    {type: 'dialog', text: '・・・・・・'},
-    {type: 'dialog', text: 'う、うーん・・・'},
-    {type: 'playSound', key: 'lock_click'},
-    {type: 'setBackground', x: 400, y: 300, key: 'street'},
-    {type: 'dialog', text: 'ここは・・・？'},
-    {type: 'addForeground', x: 400, y: 300, key: 'robot'},
-    {type: 'dialog', text: '目が覚めましたか', actorName: '???'},
-    {type: 'dialog', text: 'アンドロイド・・・？'},
-    {type: 'dialog', text: '私は「ACT-42」', actorName: '???'},
-    {type: 'dialog', text: '早速ですが——', actorName: 'ACT-42'},
-    {type: 'dialog', text: 'あなたは追われています', actorName: 'ACT-42'},
-    {type: 'dialog', text: '一刻も早くここから逃げた方がいい', actorName: 'ACT-42'},
+    {type: 'dialog', text: ''},
+    {type: 'dialog', text: 'どうしてこうなったんだろう。いつも平凡な生活に飽き飽きしていたじゃないか。'},
+    {type: 'dialog', text: 'あんなことを。'},
+    {type: 'dialog', text: '事実だとすれば、俺は一体なんなんだ。考えても、次の瞬間覚えてないんじゃ、俺じゃない誰かだ。'},
+    {type: 'dialog', text: '奇妙なことはあった。時間の流れが変だったし、レンズ越しに見ているような、そういう感覚があった。'},
+    {type: 'dialog', text: 'でも、本当に事実なんだろうか？誰かがそう思わそうとしてるだけなんじゃないのか？'},
+    {type: 'dialog', text: 'まあ、どうでもいい。あと45秒もすればわかることだ。肉体に劇的な変化が起きて、あらゆる眠った精神を引き起こすだろう。本当の目覚めだ。'},
+    {type: 'setBackground', x: 400, y: 300, key: 'station'},
+    {type: 'playSound', key: 'train'},
+    {type: 'dialog', text: 'そうと信じたい。'},
+    {type: 'setBackground', x: 400, y: 300, key: ''},
+    {type: 'timelineTransition', timelineID: 'home01'}
+  ],
+  home01: [
+    {type: 'dialog', text: 'テレビを見ていた。ドアベルが鳴った。8時頃だ。宅配を頼んでいない。面倒な感じがした。'},
     {type: 'timelineTransition', timelineID: 'choice01'}
   ],
   choice01: [
-    {type: 'setBackground', x: 400, y: 300, key: 'street'},
-    {type: 'addForeground', x: 400, y: 300, key: 'robot'},
-    {type: 'dialog', text: '一緒に逃げましょう', actorName: 'ACT-42'},
+    {type: 'dialog', text: '開ける？'},
     {type: 'choice', choices: [
       {text: 'はい', timelineID: 'choice01_a01'},
       {text: 'いいえ', timelineID: 'choice01_a02'},
-      {text: 'アンドロイド風情が話しかけるな', timelineID: 'choice01_a03'}
     ]}
   ],
   choice01_a01: [
     {type: 'setBackground', x: 400, y: 300, key: 'street'},
-    {type: 'addForeground', x: 400, y: 300, key: 'robot'},
-    {type: 'dialog', text: '事情はつかめないけどとりあえず従っておこう'},
-    {type: 'dialog', text: 'よろしい。ではこちらへ来てください', actorName: 'ACT-42'},
+    {type: 'dialog', text: '開けた。ドアの前にはスーツの中年の男が立っていた。'},
     {type: 'clearForeground'},
-    {type: 'dialog', text: 'こうして銀河を股にかけた物語が始まるのであった・・・'},
     {type: 'sceneTransition', key: 'ending'}
   ],
   choice01_a02: [
-    {type: 'setBackground', x: 400, y: 300, key: 'street'},
-    {type: 'addForeground', x: 400, y: 300, key: 'robot'},
-    {type: 'dialog', text: '・・・困りましたね', actorName: 'ACT-42'},
-    {type: 'dialog', text: '今は事情を話している暇がないんです', actorName: 'ACT-42'},
-    {type: 'dialog', text: 'あなたは捕まるべきではない', actorName: 'ACT-42'},
-    {type: 'dialog', text: 'もう一度聞きますね？', actorName: 'ACT-42'},
-    {type: 'timelineTransition', timelineID: 'choice01'}
-  ],
-  choice01_a03: [
-    {type: 'setBackground', x: 400, y: 300, key: 'street'},
-    {type: 'addForeground', x: 400, y: 300, key: 'robot'},
-    {type: 'dialog', text: '・・・・・・', actorName: 'ACT-42'},
-    {type: 'dialog', text: 'わかりました。それでは私はこれで', actorName: 'ACT-42'},
-    {type: 'clearForeground'},
-    {type: 'dialog', text: '・・・・・・'},
-    {type: 'dialog', text: 'この後俺は謎の組織に捕まり色々されてしまうのだった・・・'},
-    {type: 'sceneTransition', key: 'ending'}
+    {type: 'dialog', text: 'しばらくドアベルが鳴らされた後、静かになった。その後、この出来事について思い出すことはなかった。'},
+    {type: 'timelineTransition', timelineID: 'ending'}
   ]
 }
