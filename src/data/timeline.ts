@@ -12,7 +12,8 @@ export const timelineData: Timelines = {
     {type: 'setBackground', x: 400, y: 300, key: 'station'},
     {type: 'playSound', key: 'train'},
     {type: 'dialog', text: 'そうと信じたい。'},
-    {type: 'setBackground', x: 400, y: 300, key: ''},
+    {type: 'setBackground', x: 400, y: 300, key: 'red'},
+    {type: 'dialog', text: ''},
     {type: 'timelineTransition', timelineID: 'home01'}
   ],
   home01: [
@@ -34,6 +35,6 @@ export const timelineData: Timelines = {
   ],
   choice01_a02: [
     {type: 'dialog', text: 'しばらくドアベルが鳴らされた後、静かになった。その後、この出来事について思い出すことはなかった。'},
-    {type: 'timelineTransition', timelineID: 'ending'}
+    {type: 'sceneTransition', key: 'ending'}
   ]
 }

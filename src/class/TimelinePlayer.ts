@@ -40,7 +40,7 @@ export class TimelinePlayer {
   }
 
   private setBackground(x:number, y:number, texture:string) {
-    this.backgroundLayer.removeAll();
+    this.backgroundLayer.removeAll(true);
     // 背景画像のオブジェクト作成
     const backgroundImage = new Phaser.GameObjects.Image(this.scene, x, y, texture);
     // 背景レイヤーにオブジェクトを配置
