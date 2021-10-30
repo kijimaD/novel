@@ -1,6 +1,6 @@
-import { Timeline } from '../type/Timeline';
-import { Choice } from '../type/Choice';
-import { DialogBox } from './DialogBox';
+import { Timeline } from "../type/Timeline";
+import { Choice } from "../type/Choice";
+import { DialogBox } from "./DialogBox";
 
 export class TimelinePlayer {
   private backgroundLayer: Phaser.GameObjects.Container;
@@ -11,7 +11,11 @@ export class TimelinePlayer {
   private timeline?: Timeline;
   private timelineIndex = 0;
 
-  constructor(private scene: Phaser.Scene, private dialogBox: DialogBox, private textStyle: Phaser.Types.GameObjects.Text.TextStyle={}) {
+  constructor(
+    private scene: Phaser.Scene,
+    private dialogBox: DialogBox,
+    private textStyle: Phaser.Types.GameObjects.Text.TextStyle = {}
+  ) {
     // レイヤーをコンテナを使って表現。
     this.backgroundLayer = this.scene.add.container(0, 0);
     this.foregroundLayer = this.scene.add.container(0, 0);
@@ -20,13 +24,19 @@ export class TimelinePlayer {
 
     // クリック領域を画面全体に設定
     const { width, height } = this.scene.game.canvas;
-    this.hitArea = new Phaser.GameObjects.Zone(this.scene, width/2, height/2, width, height);
+    this.hitArea = new Phaser.GameObjects.Zone(
+      this.scene,
+      width / 2,
+      height / 2,
+      width,
+      height
+    );
     this.hitArea.setInteractive({
-      useHandCursor: true
+      useHandCursor: true,
     });
 
     // hitAreaをクリックしたらnext()を実行
-    this.hitArea.on('pointerdown', () => {
+    this.hitArea.on("pointerdown", () => {
       this.next();
     });
 
@@ -39,17 +49,27 @@ export class TimelinePlayer {
     this.next();
   }
 
-  private setBackground(x:number, y:number, texture:string) {
-    this.backgroundLayer.removeAll();
+  private setBackground(x: number, y: number, texture: string) {
+    this.backgroundLayer.removeAll(true);
     // 背景画像のオブジェクト作成
-    const backgroundImage = new Phaser.GameObjects.Image(this.scene, x, y, texture);
+    const backgroundImage = new Phaser.GameObjects.Image(
+      this.scene,
+      x,
+      y,
+      texture
+    );
     // 背景レイヤーにオブジェクトを配置
     this.backgroundLayer.add(backgroundImage);
   }
 
   // 前景画像追加
-  private addForeground(x:number, y:number, texture:string) {
-    const foregroundImage = new Phaser.GameObjects.Image(this.scene, x, y, texture);
+  private addForeground(x: number, y: number, texture: string) {
+    const foregroundImage = new Phaser.GameObjects.Image(
+      this.scene,
+      x,
+      y,
+      texture
+    );
     this.foregroundLayer.add(foregroundImage);
   }
 
@@ -59,7 +79,7 @@ export class TimelinePlayer {
   }
 
   // 効果音再生
-  private playSound(key:string) {
+  private playSound(key: string) {
     this.scene.sound.play(key);
   }
 
@@ -73,34 +93,51 @@ export class TimelinePlayer {
     const buttonHeight = 40;
     const buttonMargin = 40;
     const { width, height } = this.scene.game.canvas;
-    const buttonGroupHeight = buttonHeight * choices.length + buttonMargin * (choices.length - 1);
-    const buttonGroupOriginY = height/2 - buttonGroupHeight/2;
+    const buttonGroupHeight =
+      buttonHeight * choices.length + buttonMargin * (choices.length - 1);
+    const buttonGroupOriginY = height / 2 - buttonGroupHeight / 2;
 
     choices.forEach((choice, index) => {
-      const y = buttonGroupOriginY + buttonHeight * (index + 0.5) + buttonMargin * (index);
+      const y =
+        buttonGroupOriginY +
+        buttonHeight * (index + 0.5) +
+        buttonMargin * index;
 
-      const button = new Phaser.GameObjects.Rectangle(this.scene, width/2, y, width - buttonMargin*2, buttonHeight, 0x000000).setStrokeStyle(1, 0xffffff);
+      const button = new Phaser.GameObjects.Rectangle(
+        this.scene,
+        width / 2,
+        y,
+        width - buttonMargin * 2,
+        buttonHeight,
+        0x000000
+      ).setStrokeStyle(1, 0xffffff);
       button.setInteractive({
-        useHandCursor: true
+        useHandCursor: true,
       });
 
       // マウスオーバーで色が変わる
-      button.on('pointerover', () => {
+      button.on("pointerover", () => {
         button.setFillStyle(0x333333);
       });
 
-      button.on('pointerout', () => {
+      button.on("pointerout", () => {
         button.setFillStyle(0x000000);
       });
 
       // ボタンクリックでシーンをリスタートし、指定のタイムラインを実行する
-      button.on('pointerdown', () => {
+      button.on("pointerdown", () => {
         this.scene.scene.restart({ timelineID: choice.timelineID });
       });
 
       this.uiLayer.add(button);
 
-      const buttonText = new Phaser.GameObjects.Text(this.scene, width/2, y, choice.text, this.textStyle).setOrigin(0.5);
+      const buttonText = new Phaser.GameObjects.Text(
+        this.scene,
+        width / 2,
+        y,
+        choice.text,
+        this.textStyle
+      ).setOrigin(0.5);
 
       this.uiLayer.add(buttonText);
     });
@@ -117,7 +154,7 @@ export class TimelinePlayer {
     const timelineEvent = this.timeline[this.timelineIndex++];
 
     switch (timelineEvent.type) {
-      case 'dialog':
+      case "dialog":
         if (timelineEvent.actorName) {
           this.dialogBox.setActorNameText(timelineEvent.actorName);
         } else {
@@ -126,35 +163,35 @@ export class TimelinePlayer {
         this.dialogBox.setText(timelineEvent.text);
         break;
 
-      case 'setBackground':
+      case "setBackground":
         this.setBackground(timelineEvent.x, timelineEvent.y, timelineEvent.key);
         this.next();
         break;
 
-      case 'addForeground':
+      case "addForeground":
         this.addForeground(timelineEvent.x, timelineEvent.y, timelineEvent.key);
         this.next();
         break;
 
-      case 'clearForeground':
+      case "clearForeground":
         this.clearForeground();
         this.next();
         break;
 
-      case 'playSound':
+      case "playSound":
         this.playSound(timelineEvent.key);
         this.next();
         break;
 
-      case 'timelineTransition':
+      case "timelineTransition":
         this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
         break;
 
-      case 'sceneTransition':
+      case "sceneTransition":
         this.scene.scene.start(timelineEvent.key, timelineEvent.data);
         break;
 
-      case 'choice':
+      case "choice":
         this.setChoiceButtons(timelineEvent.choices);
         break;
 

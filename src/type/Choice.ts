@@ -1,4 +1,4 @@
 export type Choice = {
-  text: string,
-  timelineID: string
+  text: string;
+  timelineID: string;
 };
