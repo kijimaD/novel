@@ -19,6 +19,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    # Check
+    - name: lint
+      run: npm run lint
+
+    # Build
     - name: Build webpack
       run: npx webpack
 
