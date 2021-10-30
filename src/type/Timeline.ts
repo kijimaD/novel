@@ -51,6 +51,10 @@ type ChoiceEvent = {
   choices: Choice[];
 };
 
+export type SceneData = {
+  timelineID: string
+}
+
 // Timelineはイベントの配列
 export type Timeline = (
   | DialogEvent

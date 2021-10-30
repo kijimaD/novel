@@ -1,6 +1,6 @@
 import { DialogBox, DialogBoxConfig } from "../class/DialogBox";
 import { TimelinePlayer } from "../class/TimelinePlayer";
-import { Timeline } from "../type/Timeline";
+import { Timeline, SceneData } from "../type/Timeline";
 import { timelineData } from "../data/timeline";
 
 export class MainScene extends Phaser.Scene {
@@ -10,7 +10,7 @@ export class MainScene extends Phaser.Scene {
     super("main");
   }
 
-  init(data: any) {
+  init(data: SceneData) {
     const timelineID = data.timelineID || "start";
 
     if (!(timelineID in timelineData)) {
