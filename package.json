@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development --host 0.0.0.0"
+    "start": "webpack-dev-server --mode development --host 0.0.0.0",
+    "fmt": "prettier --write **/*.{js,ts}"
   },
   "author": "Kijima Daigo <norimaking777@gmail.com> (https://github.com/kijimaD)",
   "license": "ISC",
