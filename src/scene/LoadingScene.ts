@@ -6,7 +6,7 @@ export class LoadingScene extends Phaser.Scene {
   preload() {
     this.load.image(
       "logo",
-      "//cdn.pixabay.com/photo/2021/09/23/09/01/swan-6649194_1280.jpg"
+      "//cdn.pixabay.com/photo/2012/12/09/00/16/abstract-69124_1280.jpg"
     );
     this.load.image(
       "street",

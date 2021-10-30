@@ -52,8 +52,8 @@ type ChoiceEvent = {
 };
 
 export type SceneData = {
-  timelineID: string
-}
+  timelineID: string;
+};
 
 // Timelineはイベントの配列
 export type Timeline = (
