@@ -9,9 +9,9 @@ export class TimelinePlayer {
   private hitArea: Phaser.GameObjects.Zone;
 
   private timeline?: Timeline;
-  private timelineIndex: number = 0;
-  private timelineTextIndex: number = 0;
-  private execute: boolean = false;
+  private timelineIndex = 0;
+  private timelineTextIndex = 0;
+  private execute = false;
 
   constructor(
     private scene: Phaser.Scene,
