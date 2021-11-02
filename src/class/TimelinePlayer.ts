@@ -6,6 +6,9 @@ export class TimelinePlayer {
   private keyA: Phaser.Input.Keyboard.Key = this.scene.input.keyboard.addKey(
     Phaser.Input.Keyboard.KeyCodes.A
   );
+  private keyEnter: Phaser.Input.Keyboard.Key = this.scene.input.keyboard.addKey(
+    Phaser.Input.Keyboard.KeyCodes.ENTER
+  );
   private backgroundLayer: Phaser.GameObjects.Container;
   private foregroundLayer: Phaser.GameObjects.Container;
   private uiLayer: Phaser.GameObjects.Container;
@@ -40,9 +43,7 @@ export class TimelinePlayer {
       useHandCursor: true,
     });
 
-    this.keyA.on("down", () => {
-      this.fullImage();
-    });
+    this.setKeyboards();
 
     // hitAreaをクリックしたらnext()を実行
     this.hitArea.on("pointerdown", () => {
@@ -56,6 +57,18 @@ export class TimelinePlayer {
   public start(timeline: Timeline) {
     this.timeline = timeline;
     this.next();
+  }
+
+  private setKeyboards() {
+    // A でdialog boxをトグル
+    this.keyA.on("down", () => {
+      this.fullImage();
+    });
+
+    // Enter で文字送り
+    this.keyEnter.on("down", () => {
+      this.next();
+    });
   }
 
   private setBackground(x: number, y: number, texture: string) {
