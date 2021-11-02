@@ -9,9 +9,9 @@ export class TimelinePlayer {
   private hitArea: Phaser.GameObjects.Zone;
 
   private timeline?: Timeline;
-  private timelineIndex = 0;
-  private timelineTextIndex = 0;
-  private execute = false;
+  private timelineIndex: number = 0;
+  private timelineTextIndex: number = 0;
+  private execute: boolean = false;
 
   constructor(
     private scene: Phaser.Scene,
@@ -207,6 +207,10 @@ export class TimelinePlayer {
 
       case "choice":
         this.setChoiceButtons(timelineEvent.choices);
+        break;
+
+      case "fullImage":
+        this.dialogBox.setVisible(false);
         break;
 
       default:
