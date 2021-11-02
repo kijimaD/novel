@@ -4,14 +4,7 @@ export class LoadingScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image(
-      "logo",
-      "//cdn.pixabay.com/photo/2012/12/09/00/16/abstract-69124_1280.jpg"
-    );
-    this.load.image(
-      "street",
-      "//cdn.pixabay.com/photo/2013/03/02/02/41/alley-89197_1280.jpg"
-    );
+    this.load.image("logo", "assets/image/smoke.png");
     this.load.image("station", "assets/image/station.png");
     this.load.image("red", "assets/image/red.png");
 
