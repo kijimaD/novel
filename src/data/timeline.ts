@@ -28,7 +28,8 @@ export const timelineData: Timelines = {
     {
       type: "dialog",
       text: [
-        "テレビを見ていた。ドアベルが鳴った。8時頃だ。宅配を頼んでいない。面倒な感じがした。",
+        "夜仕事を終えて本を読んでいると、ドアベルが鳴った。",
+        "来客などない時間帯なので、出るか出ないか逡巡する。",
       ],
     },
     { type: "timelineTransition", timelineID: "choice01" },
@@ -39,25 +40,30 @@ export const timelineData: Timelines = {
     {
       type: "choice",
       choices: [
-        { text: "はい", timelineID: "choice01_a01" },
+        { text: "はい", timelineID: "home02" },
         { text: "いいえ", timelineID: "choice01_a02" },
       ],
     },
-  ],
-  choice01_a01: [
-    { type: "setBackground", x: 400, y: 300, key: "street" },
-    {
-      type: "dialog",
-      text: ["開けた。ドアの前にはスーツの中年の男が立っていた。"],
-    },
-    { type: "clearForeground" },
-    { type: "sceneTransition", key: "ending" },
   ],
   choice01_a02: [
     {
       type: "dialog",
       text: [
-        "しばらくドアベルが鳴らされた後、静かになった。その後、この出来事について思い出すことはなかった。",
+        "テレビの音量を少し下げて、そのまま無視した。",
+        "居留守だと明らかだからか、しばらくドアベルが鳴らされた後、静かになった。",
+        "その後来客が誰だったのかはわからず、来たことを思い出すことすらなかった。",
+      ],
+    },
+    { type: "sceneTransition", key: "ending" },
+  ],
+
+  home02: [
+    {
+      type: "dialog",
+      text: [
+        "開けた。",
+        "見覚えのない両方スーツの中年の男と若い男が立っていた。",
+        "面倒そうな感じがして、少し後悔した。",
       ],
     },
     { type: "sceneTransition", key: "ending" },
