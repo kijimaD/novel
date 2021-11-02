@@ -10,6 +10,8 @@ export class TimelinePlayer {
 
   private timeline?: Timeline;
   private timelineIndex = 0;
+  private timelineTextIndex = 0;
+  private execute = false;
 
   constructor(
     private scene: Phaser.Scene,
@@ -151,7 +153,10 @@ export class TimelinePlayer {
       return;
     }
 
-    const timelineEvent = this.timeline[this.timelineIndex++];
+    if (this.execute) {
+      this.timelineIndex++;
+    }
+    const timelineEvent = this.timeline[this.timelineIndex];
 
     switch (timelineEvent.type) {
       case "dialog":
@@ -160,7 +165,16 @@ export class TimelinePlayer {
         } else {
           this.dialogBox.clearActorNameText();
         }
-        this.dialogBox.setText(timelineEvent.text);
+
+        if (typeof timelineEvent.text[this.timelineTextIndex] == "undefined") {
+          this.execute = true;
+          this.timelineTextIndex = 0;
+          this.next();
+        } else {
+          this.execute = false;
+          this.dialogBox.setText(timelineEvent.text[this.timelineTextIndex]);
+          this.timelineTextIndex++;
+        }
         break;
 
       case "setBackground":
