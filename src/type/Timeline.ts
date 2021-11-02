@@ -2,7 +2,7 @@ import { Choice } from "./Choice";
 
 type DialogEvent = {
   type: "dialog";
-  text: string;
+  text: Array<string>;
   actorName?: string;
 };
 
@@ -51,9 +51,14 @@ type ChoiceEvent = {
   choices: Choice[];
 };
 
+// ダイアログウィンドウ削除
+type fullImageEvent = {
+  type: "fullImage";
+};
+
 export type SceneData = {
-  timelineID: string
-}
+  timelineID: string;
+};
 
 // Timelineはイベントの配列
 export type Timeline = (
@@ -65,4 +70,5 @@ export type Timeline = (
   | playSoundEvent
   | SceneTransitionEvent
   | ChoiceEvent
+  | fullImageEvent
 )[];

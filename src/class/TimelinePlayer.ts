@@ -3,6 +3,12 @@ import { Choice } from "../type/Choice";
 import { DialogBox } from "./DialogBox";
 
 export class TimelinePlayer {
+  private keyA: Phaser.Input.Keyboard.Key = this.scene.input.keyboard.addKey(
+    Phaser.Input.Keyboard.KeyCodes.A
+  );
+  private keyEnter: Phaser.Input.Keyboard.Key = this.scene.input.keyboard.addKey(
+    Phaser.Input.Keyboard.KeyCodes.ENTER
+  );
   private backgroundLayer: Phaser.GameObjects.Container;
   private foregroundLayer: Phaser.GameObjects.Container;
   private uiLayer: Phaser.GameObjects.Container;
@@ -10,6 +16,8 @@ export class TimelinePlayer {
 
   private timeline?: Timeline;
   private timelineIndex = 0;
+  private timelineTextIndex = 0;
+  private execute = false;
 
   constructor(
     private scene: Phaser.Scene,
@@ -31,14 +39,9 @@ export class TimelinePlayer {
       width,
       height
     );
-    this.hitArea.setInteractive({
-      useHandCursor: true,
-    });
 
-    // hitAreaをクリックしたらnext()を実行
-    this.hitArea.on("pointerdown", () => {
-      this.next();
-    });
+    this.setMouses();
+    this.setKeyboards();
 
     this.uiLayer.add(this.hitArea);
   }
@@ -47,6 +50,29 @@ export class TimelinePlayer {
   public start(timeline: Timeline) {
     this.timeline = timeline;
     this.next();
+  }
+
+  private setMouses() {
+    this.hitArea.setInteractive({
+      useHandCursor: true,
+    });
+
+    // hitAreaをクリックしたらnext()を実行
+    this.hitArea.on("pointerdown", () => {
+      this.next();
+    });
+  }
+
+  private setKeyboards() {
+    // A でdialog boxをトグル
+    this.keyA.on("down", () => {
+      this.fullImage();
+    });
+
+    // Enter で文字送り
+    this.keyEnter.on("down", () => {
+      this.next();
+    });
   }
 
   private setBackground(x: number, y: number, texture: string) {
@@ -143,6 +169,10 @@ export class TimelinePlayer {
     });
   }
 
+  private fullImage() {
+    this.dialogBox.setVisible(!this.dialogBox.visible);
+  }
+
   private next() {
     if (!this.timeline) {
       return;
@@ -151,7 +181,10 @@ export class TimelinePlayer {
       return;
     }
 
-    const timelineEvent = this.timeline[this.timelineIndex++];
+    if (this.execute) {
+      this.timelineIndex++;
+    }
+    const timelineEvent = this.timeline[this.timelineIndex];
 
     switch (timelineEvent.type) {
       case "dialog":
@@ -160,7 +193,16 @@ export class TimelinePlayer {
         } else {
           this.dialogBox.clearActorNameText();
         }
-        this.dialogBox.setText(timelineEvent.text);
+
+        if (typeof timelineEvent.text[this.timelineTextIndex] == "undefined") {
+          this.execute = true;
+          this.timelineTextIndex = 0;
+          this.next();
+        } else {
+          this.execute = false;
+          this.dialogBox.setText(timelineEvent.text[this.timelineTextIndex]);
+          this.timelineTextIndex++;
+        }
         break;
 
       case "setBackground":
@@ -193,6 +235,10 @@ export class TimelinePlayer {
 
       case "choice":
         this.setChoiceButtons(timelineEvent.choices);
+        break;
+
+      case "fullImage":
+        this.fullImage();
         break;
 
       default:

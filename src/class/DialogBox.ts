@@ -91,7 +91,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
     );
     this.add(this.textPrompt);
     const promptCharacter = "▼";
-    this.textPrompt.setText(promptCharacter);
+    this.textPrompt.setText(promptCharacter).setAlpha(0.8);
   }
 
   public setText(text: string) {
