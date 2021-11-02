@@ -6,9 +6,8 @@ export class TimelinePlayer {
   private keyA: Phaser.Input.Keyboard.Key = this.scene.input.keyboard.addKey(
     Phaser.Input.Keyboard.KeyCodes.A
   );
-  private keyEnter: Phaser.Input.Keyboard.Key = this.scene.input.keyboard.addKey(
-    Phaser.Input.Keyboard.KeyCodes.ENTER
-  );
+  private keyEnter: Phaser.Input.Keyboard.Key =
+    this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
   private backgroundLayer: Phaser.GameObjects.Container;
   private foregroundLayer: Phaser.GameObjects.Container;
   private uiLayer: Phaser.GameObjects.Container;
