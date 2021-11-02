@@ -3,7 +3,9 @@ import { Choice } from "../type/Choice";
 import { DialogBox } from "./DialogBox";
 
 export class TimelinePlayer {
-  private keyA: Phaser.Input.Keyboard.Key = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);;
+  private keyA: Phaser.Input.Keyboard.Key = this.scene.input.keyboard.addKey(
+    Phaser.Input.Keyboard.KeyCodes.A
+  );
   private backgroundLayer: Phaser.GameObjects.Container;
   private foregroundLayer: Phaser.GameObjects.Container;
   private uiLayer: Phaser.GameObjects.Container;
@@ -40,7 +42,7 @@ export class TimelinePlayer {
 
     this.keyA.on("down", () => {
       this.fullImage();
-    })
+    });
 
     // hitAreaをクリックしたらnext()を実行
     this.hitArea.on("pointerdown", () => {
