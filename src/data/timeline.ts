@@ -11,39 +11,19 @@ export const timelineData: Timelines = {
         "感触、におい。忘れられない。",
         "あのときまでは、何も問題なかった。そう、何も問題なかった。",
         "でも一度思い出すとそのことしか考えられなくなった。",
-      ],
-    },
-    { type: "dialog", text: ["あんなことを。", "aaaa", "bbbb"] },
-    {
-      type: "dialog",
-      text: [
-        "事実だとすれば、俺は一体なんなんだ。考えても、次の瞬間覚えてないんじゃ、俺じゃない誰かだ。",
-      ],
-    },
-    {
-      type: "dialog",
-      text: [
-        "奇妙なことはあった。時間の流れが変だったし、レンズ越しに見ているような、そういう感覚があった。",
-      ],
-    },
-    {
-      type: "dialog",
-      text: [
-        "でも、本当に事実なんだろうか？誰かがそう思わそうとしてるだけなんじゃないのか？",
-      ],
-    },
-    {
-      type: "dialog",
-      text: [
-        "まあ、どうでもいい。あと45秒もすればわかることだ。肉体に劇的な変化が起きて、あらゆる眠った精神を引き起こすだろう。本当の目覚めだ。",
+        "奇妙だった。時間は伸び縮みしたし、常に画面越しに見ているような感じがしていた。",
+        "あれは目の前だったんだ。世界は長方形でなくてオレンジのカーブミラーだということを忘れてはいけない。",
+        "でもそんなことはどうだっていい。もうすぐわかる。あと16秒もすればわかる。完全に忘れるか、現実に戻してくれる。本当の目覚めだ。",
       ],
     },
     { type: "setBackground", x: 400, y: 300, key: "station" },
     { type: "playSound", key: "train" },
-    { type: "dialog", text: ["そうと信じたい。"] },
+    { type: "dialog", text: ["何も思い残すことはない。"] },
     { type: "setBackground", x: 400, y: 300, key: "red" },
+    { type: "fullImage" },
     { type: "timelineTransition", timelineID: "home01" },
   ],
+
   home01: [
     {
       type: "dialog",
@@ -53,6 +33,7 @@ export const timelineData: Timelines = {
     },
     { type: "timelineTransition", timelineID: "choice01" },
   ],
+
   choice01: [
     { type: "dialog", text: ["開ける？"] },
     {

@@ -51,6 +51,11 @@ type ChoiceEvent = {
   choices: Choice[];
 };
 
+// ダイアログウィンドウ削除
+type fullImageEvent = {
+  type: "fullImage";
+};
+
 export type SceneData = {
   timelineID: string;
 };
@@ -65,4 +70,5 @@ export type Timeline = (
   | playSoundEvent
   | SceneTransitionEvent
   | ChoiceEvent
+  | fullImageEvent
 )[];
