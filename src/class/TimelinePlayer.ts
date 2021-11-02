@@ -39,16 +39,9 @@ export class TimelinePlayer {
       width,
       height
     );
-    this.hitArea.setInteractive({
-      useHandCursor: true,
-    });
 
+    this.setMouses();
     this.setKeyboards();
-
-    // hitAreaをクリックしたらnext()を実行
-    this.hitArea.on("pointerdown", () => {
-      this.next();
-    });
 
     this.uiLayer.add(this.hitArea);
   }
@@ -57,6 +50,17 @@ export class TimelinePlayer {
   public start(timeline: Timeline) {
     this.timeline = timeline;
     this.next();
+  }
+
+  private setMouses() {
+    this.hitArea.setInteractive({
+      useHandCursor: true,
+    });
+
+    // hitAreaをクリックしたらnext()を実行
+    this.hitArea.on("pointerdown", () => {
+      this.next();
+    });
   }
 
   private setKeyboards() {
