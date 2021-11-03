@@ -18,7 +18,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
   private eventCounter = 0;
   private dialog = new Array();
-  private dialogSpeed = 1;
+  private dialogSpeed = 5;
   private timedEvent: Phaser.Time.TimerEvent | undefined;
 
   constructor(
@@ -122,16 +122,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private _setText(text: string) {
     // Reset the dialog
     if (this.text) this.text.destroy();
-    var x = this.padding + 10;
-    // var y = this._getGameHeight() - this.windowHeight - this.padding + 10;
-    var y = 100;
-    this.text = this.scene.make.text({
-      x,
-      y,
-      text,
-      style: {
-        wordWrap: { width: 100 - this.padding * 2 - 25 },
-      },
+    this.text = this.scene.add.text(this.text.x, this.text.y, text, {
+      fontSize: "24px",
     });
   }
 
