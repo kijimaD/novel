@@ -16,6 +16,11 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private textPrompt: Phaser.GameObjects.Text;
   private padding: number;
 
+  private eventCounter = 0;
+  private dialog = new Array();
+  private dialogSpeed = 1;
+  private timedEvent: Phaser.Time.TimerEvent | undefined;
+
   constructor(
     public scene: Phaser.Scene,
     {
@@ -94,8 +99,50 @@ export class DialogBox extends Phaser.GameObjects.Container {
     this.textPrompt.setText(promptCharacter).setAlpha(0.8);
   }
 
-  public setText(text: string) {
-    this.text.setText(text);
+  // Sets the text for the dialog window
+  public setText(text: string, animate: boolean) {
+    // Reset the dialog
+    this.eventCounter = 0;
+    this.dialog = text.split("");
+    if (this.timedEvent) {
+      this.timedEvent.remove();
+    }
+    var tempText = animate ? "" : text;
+    this._setText(tempText);
+    if (animate) {
+      this.timedEvent = this.scene.time.addEvent({
+        delay: 150 - this.dialogSpeed * 30,
+        callback: this._animateText,
+        callbackScope: this,
+        loop: true,
+      });
+    }
+  }
+
+  private _setText(text: string) {
+    // Reset the dialog
+    if (this.text) this.text.destroy();
+    var x = this.padding + 10;
+    // var y = this._getGameHeight() - this.windowHeight - this.padding + 10;
+    var y = 100;
+    this.text = this.scene.make.text({
+      x,
+      y,
+      text,
+      style: {
+        wordWrap: { width: 100 - this.padding * 2 - 25 },
+      },
+    });
+  }
+
+  // Slowly displays the text in the window to make it appear annimated.
+  // Use for event callback function.
+  private _animateText() {
+    this.eventCounter++;
+    this.text.setText(this.text.text + this.dialog[this.eventCounter - 1]);
+    if (this.eventCounter === this.dialog.length && this.timedEvent) {
+      this.timedEvent.remove();
+    }
   }
 
   public setActorNameText(name: string) {

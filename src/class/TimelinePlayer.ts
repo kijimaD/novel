@@ -199,7 +199,10 @@ export class TimelinePlayer {
           this.next();
         } else {
           this.execute = false;
-          this.dialogBox.setText(timelineEvent.text[this.timelineTextIndex]);
+          this.dialogBox.setText(
+            timelineEvent.text[this.timelineTextIndex],
+            true
+          );
           this.timelineTextIndex++;
         }
         break;
