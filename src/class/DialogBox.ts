@@ -15,6 +15,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private actorNameText: Phaser.GameObjects.Text;
   private textPrompt: Phaser.GameObjects.Text;
   private padding: number;
+  private margin: number;
 
   private eventCounter = 0;
   private dialog = new Array();
@@ -34,6 +35,9 @@ export class DialogBox extends Phaser.GameObjects.Container {
     }: DialogBoxConfig
   ) {
     super(scene, 0, 0);
+
+    this.padding = padding
+    this.margin = margin
 
     this.box = new Phaser.GameObjects.Rectangle(
       this.scene,
