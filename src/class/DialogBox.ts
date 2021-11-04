@@ -121,11 +121,13 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
   private _setText(text: string) {
     // Reset the dialog
+    // FIXME: 最初に作ったthis.textのstyle propertyを再利用したい
     if (this.text) this.text.destroy();
     this.text = this.scene.add.text(this.text.x, this.text.y, text, {
       fontSize: "24px",
       wordWrap: { width: this.box.width, useAdvancedWrap: true },
     });
+    this.add(this.text)
   }
 
   // Slowly displays the text in the window to make it appear annimated.
