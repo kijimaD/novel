@@ -124,6 +124,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
     if (this.text) this.text.destroy();
     this.text = this.scene.add.text(this.text.x, this.text.y, text, {
       fontSize: "24px",
+      wordWrap: { width: this.box.width, useAdvancedWrap: true },
     });
   }
 
