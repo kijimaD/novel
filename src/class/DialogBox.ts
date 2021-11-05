@@ -15,6 +15,12 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private actorNameText: Phaser.GameObjects.Text;
   private textPrompt: Phaser.GameObjects.Text;
   private padding: number;
+  private margin: number;
+
+  private eventCounter = 0;
+  private dialog: string[] = [""];
+  private dialogSpeed = 5;
+  private timedEvent: Phaser.Time.TimerEvent | undefined;
 
   constructor(
     public scene: Phaser.Scene,
@@ -29,6 +35,9 @@ export class DialogBox extends Phaser.GameObjects.Container {
     }: DialogBoxConfig
   ) {
     super(scene, 0, 0);
+
+    this.padding = padding;
+    this.margin = margin;
 
     this.box = new Phaser.GameObjects.Rectangle(
       this.scene,
@@ -94,8 +103,48 @@ export class DialogBox extends Phaser.GameObjects.Container {
     this.textPrompt.setText(promptCharacter).setAlpha(0.8);
   }
 
-  public setText(text: string) {
-    this.text.setText(text);
+  // Sets the text for the dialog window
+  public setText(text: string, animate: boolean) {
+    // Reset the dialog
+    this.eventCounter = 0;
+    this.dialog = text.split("");
+    if (this.timedEvent) {
+      this.timedEvent.remove();
+    }
+    const tempText = animate ? "" : text;
+    this._setText(tempText);
+    if (text.length === 0) return;
+    if (animate) {
+      this.timedEvent = this.scene.time.addEvent({
+        delay: 150 - this.dialogSpeed * 30,
+        callback: () => {
+          this._animateText();
+        },
+        callbackScope: this,
+        loop: true,
+      });
+    }
+  }
+
+  private _setText(text: string) {
+    // Reset the dialog
+    // FIXME: 最初に作ったthis.textのstyle propertyを再利用したい
+    if (this.text) this.text.destroy();
+    this.text = this.scene.add.text(this.text.x, this.text.y, text, {
+      fontSize: "24px",
+      wordWrap: { width: this.box.width, useAdvancedWrap: true },
+    });
+    this.add(this.text);
+  }
+
+  // Slowly displays the text in the window to make it appear annimated.
+  // Use for event callback function.
+  private _animateText() {
+    this.eventCounter++;
+    this.text.setText(this.text.text + this.dialog[this.eventCounter - 1]);
+    if (this.eventCounter === this.dialog.length && this.timedEvent) {
+      this.timedEvent.remove();
+    }
   }
 
   public setActorNameText(name: string) {

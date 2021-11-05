@@ -7,7 +7,7 @@ npm install
 npm start
 ```
 
-## build(prooduction)
+## build(production)
 ```
 npx webpack
 ```
