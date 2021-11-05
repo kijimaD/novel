@@ -113,6 +113,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
     }
     const tempText = animate ? "" : text;
     this._setText(tempText);
+    if (text.length === 0) return;
     if (animate) {
       this.timedEvent = this.scene.time.addEvent({
         delay: 150 - this.dialogSpeed * 30,
