@@ -2,7 +2,7 @@ import { Choice } from "./Choice";
 
 type DialogEvent = {
   type: "dialog";
-  text: Array<string>;
+  text: string[];
   actorName?: string;
 };
 

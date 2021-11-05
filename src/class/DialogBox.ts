@@ -18,7 +18,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private margin: number;
 
   private eventCounter = 0;
-  private dialog = new Array();
+  private dialog: string[] = [""];
   private dialogSpeed = 5;
   private timedEvent: Phaser.Time.TimerEvent | undefined;
 
@@ -36,8 +36,8 @@ export class DialogBox extends Phaser.GameObjects.Container {
   ) {
     super(scene, 0, 0);
 
-    this.padding = padding
-    this.margin = margin
+    this.padding = padding;
+    this.margin = margin;
 
     this.box = new Phaser.GameObjects.Rectangle(
       this.scene,
@@ -111,12 +111,14 @@ export class DialogBox extends Phaser.GameObjects.Container {
     if (this.timedEvent) {
       this.timedEvent.remove();
     }
-    var tempText = animate ? "" : text;
+    const tempText = animate ? "" : text;
     this._setText(tempText);
     if (animate) {
       this.timedEvent = this.scene.time.addEvent({
         delay: 150 - this.dialogSpeed * 30,
-        callback: this._animateText,
+        callback: () => {
+          this._animateText();
+        },
         callbackScope: this,
         loop: true,
       });
@@ -131,7 +133,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
       fontSize: "24px",
       wordWrap: { width: this.box.width, useAdvancedWrap: true },
     });
-    this.add(this.text)
+    this.add(this.text);
   }
 
   // Slowly displays the text in the window to make it appear annimated.
