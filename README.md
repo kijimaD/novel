@@ -1,4 +1,5 @@
 Learn Phaser library.
+Base code: https://qiita.com/non_cal/items/622108030aa2e516260c
 
 ## Run
 development server
@@ -21,5 +22,3 @@ npm run fmt
 ```
 npm run lint
 ```
-
-source of a quotation: https://qiita.com/non_cal/items/622108030aa2e516260c
