@@ -35,8 +35,18 @@ export class FadeScene extends Phaser.Scene {
       useHandCursor: true,
     });
 
+    const duration_ms = 1000;
     zone.on("pointerdown", () => {
-      this.scene.start("main", { timelineID: this.timelineID });
+      this.tweens.add({
+        targets: targetObj,
+        alpha: 0,
+        duration: duration_ms,
+        ease: "Power2",
+      });
+
+      this.time.delayedCall(duration_ms, () => {
+        this.scene.start("main", { timelineID: this.timelineID });
+      });
     });
   }
 }

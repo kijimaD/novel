@@ -236,7 +236,7 @@ export class TimelinePlayer {
             duration: duration_ms,
             ease: "Power2",
           });
-          this.scene.time.delayedCall(duration_ms, () => {
+          this.scene.time.delayedCall(duration_ms / 2, () => {
             this.scene.scene.start("fade", {
               timelineID: timelineEvent.timelineID,
             });
