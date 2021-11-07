@@ -228,7 +228,20 @@ export class TimelinePlayer {
         break;
 
       case "timelineTransition":
-        this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
+        const duration_ms = 2000;
+        if (timelineEvent.animation) {
+          this.scene.tweens.add({
+            targets: [this.backgroundLayer, this.dialogBox],
+            alpha: 0,
+            duration: duration_ms,
+            ease: "Power2",
+          });
+          this.scene.time.delayedCall(duration_ms, () => {
+            this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
+          });
+        } else {
+          this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
+        }
         break;
 
       case "sceneTransition":
