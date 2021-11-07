@@ -229,7 +229,7 @@ export class TimelinePlayer {
 
       case "timelineTransition":
         if (timelineEvent.animation) {
-          const duration_ms = 2000;
+          const duration_ms = 1000;
           this.scene.tweens.add({
             targets: [this.backgroundLayer, this.dialogBox],
             alpha: 0,
@@ -237,7 +237,9 @@ export class TimelinePlayer {
             ease: "Power2",
           });
           this.scene.time.delayedCall(duration_ms, () => {
-            this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
+            this.scene.scene.start("fade", {
+              timelineID: timelineEvent.timelineID,
+            });
           });
         } else {
           this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
