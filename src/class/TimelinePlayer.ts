@@ -228,8 +228,8 @@ export class TimelinePlayer {
         break;
 
       case "timelineTransition":
-        const duration_ms = 2000;
         if (timelineEvent.animation) {
+          const duration_ms = 2000;
           this.scene.tweens.add({
             targets: [this.backgroundLayer, this.dialogBox],
             alpha: 0,
