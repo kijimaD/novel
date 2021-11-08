@@ -13,7 +13,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private text: Phaser.GameObjects.Text;
   private actorNameBox: Phaser.GameObjects.Rectangle;
   private actorNameText: Phaser.GameObjects.Text;
-  private textPrompt: Phaser.GameObjects.Text;
+  private textPrompt: Phaser.GameObjects.Triangle;
   private padding: number;
   private margin: number;
 
@@ -90,17 +90,27 @@ export class DialogBox extends Phaser.GameObjects.Container {
 
     this.padding = padding;
 
-    // text prompt
-    this.textPrompt = new Phaser.GameObjects.Text(
+    this.textPrompt = new Phaser.GameObjects.Triangle(
       this.scene,
       x + width / 2 - padding * 4,
-      y + height / 4,
-      "",
-      textStyle
+      y + padding * 2,
+      0,
+      32,
+      32,
+      32,
+      16,
+      64,
+      0x4169a1
     );
     this.add(this.textPrompt);
-    const promptCharacter = "▼";
-    this.textPrompt.setText(promptCharacter).setAlpha(0.8);
+    this.scene.tweens.add({
+      targets: this.textPrompt,
+      yoyo: true,
+      alpha: 0.2,
+      repeat: -1,
+      duration: 800,
+    });
+    this.textPrompt.setOrigin(0, 0.5);
   }
 
   // Sets the text for the dialog window
