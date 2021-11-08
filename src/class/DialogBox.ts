@@ -16,6 +16,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private textPrompt: Phaser.GameObjects.Triangle;
   private padding: number;
   private margin: number;
+  private textAnimating = false;
 
   private eventCounter = 0;
   private dialog: string[] = [""];
@@ -111,6 +112,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
       duration: 800,
     });
     this.textPrompt.setOrigin(0, 0.5);
+    this.textPrompt.setVisible(false);
   }
 
   // Sets the text for the dialog window
@@ -153,9 +155,12 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private _animateText() {
     this.eventCounter++;
     this.text.setText(this.text.text + this.dialog[this.eventCounter - 1]);
+    this.textAnimating = true;
     if (this.eventCounter === this.dialog.length && this.timedEvent) {
+      this.textAnimating = false;
       this.timedEvent.remove();
     }
+    this.togglePrompt();
   }
 
   public setActorNameText(name: string) {
@@ -174,5 +179,13 @@ export class DialogBox extends Phaser.GameObjects.Container {
   public clearActorNameText() {
     this.actorNameBox.setVisible(false);
     this.actorNameText.setVisible(false);
+  }
+
+  private togglePrompt() {
+    if (this.textAnimating) {
+      this.textPrompt.setVisible(false);
+    } else {
+      this.textPrompt.setVisible(true);
+    }
   }
 }
