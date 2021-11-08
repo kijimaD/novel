@@ -13,9 +13,10 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private text: Phaser.GameObjects.Text;
   private actorNameBox: Phaser.GameObjects.Rectangle;
   private actorNameText: Phaser.GameObjects.Text;
-  private textPrompt: Phaser.GameObjects.Text;
+  private textPrompt: Phaser.GameObjects.DOMElement;
   private padding: number;
   private margin: number;
+  private textAnimating = false;
 
   private eventCounter = 0;
   private dialog: string[] = [""];
@@ -88,19 +89,24 @@ export class DialogBox extends Phaser.GameObjects.Container {
     this.actorNameText.setVisible(false);
     this.add(this.actorNameText);
 
-    this.padding = padding;
-
-    // text prompt
-    this.textPrompt = new Phaser.GameObjects.Text(
-      this.scene,
-      x + width / 2 - padding * 4,
-      y + height / 4,
-      "",
-      textStyle
+    this.textPrompt = this.scene.add.dom(
+      x + width / 2 - padding * 2,
+      y + height / 2 - padding * 2,
+      "div",
+      "width: 0; height: 0; border-style: solid; border-width: 1em 0.5em 0 0.5em; border-color: #007bff transparent transparent transparent;",
+      ""
     );
-    this.add(this.textPrompt);
-    const promptCharacter = "▼";
-    this.textPrompt.setText(promptCharacter).setAlpha(0.8);
+    this.textPrompt.setPerspective(1000);
+    this.textPrompt.rotate3d.set(0, 1, 0, 0);
+    this.textPrompt.setVisible(false);
+
+    this.scene.tweens.add({
+      targets: this.textPrompt.rotate3d,
+      w: 180,
+      duration: 800,
+      ease: "linear",
+      repeat: -1,
+    });
   }
 
   // Sets the text for the dialog window
@@ -143,9 +149,12 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private _animateText() {
     this.eventCounter++;
     this.text.setText(this.text.text + this.dialog[this.eventCounter - 1]);
+    this.textAnimating = true;
     if (this.eventCounter === this.dialog.length && this.timedEvent) {
+      this.textAnimating = false;
       this.timedEvent.remove();
     }
+    this.togglePrompt();
   }
 
   public setActorNameText(name: string) {
@@ -164,5 +173,13 @@ export class DialogBox extends Phaser.GameObjects.Container {
   public clearActorNameText() {
     this.actorNameBox.setVisible(false);
     this.actorNameText.setVisible(false);
+  }
+
+  private togglePrompt() {
+    if (this.textAnimating) {
+      this.textPrompt.setVisible(false);
+    } else {
+      this.textPrompt.setVisible(true);
+    }
   }
 }

@@ -228,7 +228,22 @@ export class TimelinePlayer {
         break;
 
       case "timelineTransition":
-        this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
+        if (timelineEvent.animation) {
+          const duration_ms = 1000;
+          this.scene.tweens.add({
+            targets: [this.backgroundLayer, this.dialogBox],
+            alpha: 0,
+            duration: duration_ms,
+            ease: "Power2",
+          });
+          this.scene.time.delayedCall(duration_ms / 2, () => {
+            this.scene.scene.start("fade", {
+              timelineID: timelineEvent.timelineID,
+            });
+          });
+        } else {
+          this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
+        }
         break;
 
       case "sceneTransition":

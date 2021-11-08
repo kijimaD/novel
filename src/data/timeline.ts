@@ -2,26 +2,10 @@ import { Timelines } from "../type/Timelines";
 
 export const timelineData: Timelines = {
   start: [
-    {
-      type: "dialog",
-      text: [
-        "どうして忘れていたんだろう。",
-        "あれは間違いなく事実だ。",
-        "確かに覚えている。",
-        "感触、におい。忘れられない。",
-        "あのときまでは、何も問題なかった。そう、何も問題なかった。",
-        "でも一度思い出すとそのことしか考えられなくなった。",
-        "奇妙だった。時間は伸び縮みしたし、常に画面越しに見ているような感じがしていた。",
-        "あれは目の前だったんだ。世界は長方形でなくてオレンジのカーブミラーだということを忘れてはいけない。",
-        "でもそんなことはどうだっていい。もうすぐわかる。あと16秒もすればわかる。完全に忘れるか、現実に戻してくれる。",
-      ],
-    },
+    { type: "dialog", text: ["最初に背景を置けないための処置。"] },
     { type: "setBackground", x: 400, y: 300, key: "station" },
-    { type: "playSound", key: "train" },
     { type: "dialog", text: ["本当の目覚めだ。"] },
-    { type: "setBackground", x: 400, y: 300, key: "red" },
-    { type: "fullImage" },
-    { type: "timelineTransition", timelineID: "home01" },
+    { type: "timelineTransition", timelineID: "home01", animation: true },
   ],
 
   home01: [
@@ -32,6 +16,7 @@ export const timelineData: Timelines = {
         "来客などない時間帯なので、出るか出ないか逡巡する。",
       ],
     },
+    { type: "setBackground", x: 400, y: 300, key: "station" },
     { type: "timelineTransition", timelineID: "choice01" },
   ],
 

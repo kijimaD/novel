@@ -29,7 +29,7 @@ export class TitleScene extends Phaser.Scene {
     });
 
     zone.on("pointerdown", () => {
-      this.sound.play("lock_click");
+      // this.sound.play("lock_click");
       this.scene.start("main", { timelineID: "start" });
     });
   }

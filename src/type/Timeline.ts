@@ -36,6 +36,7 @@ type playSoundEvent = {
 type TimelineTransitionEvent = {
   type: "timelineTransition";
   timelineID: string;
+  animation?: boolean;
 };
 
 // シーン遷移イベント
