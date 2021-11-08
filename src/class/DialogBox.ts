@@ -13,7 +13,7 @@ export class DialogBox extends Phaser.GameObjects.Container {
   private text: Phaser.GameObjects.Text;
   private actorNameBox: Phaser.GameObjects.Rectangle;
   private actorNameText: Phaser.GameObjects.Text;
-  private textPrompt: Phaser.GameObjects.Triangle;
+  private textPrompt: Phaser.GameObjects.DOMElement;
   private padding: number;
   private margin: number;
   private textAnimating = false;
@@ -89,30 +89,24 @@ export class DialogBox extends Phaser.GameObjects.Container {
     this.actorNameText.setVisible(false);
     this.add(this.actorNameText);
 
-    this.padding = padding;
-
-    this.textPrompt = new Phaser.GameObjects.Triangle(
-      this.scene,
-      x + width / 2 - padding * 4,
-      y + padding * 2,
-      0,
-      32,
-      32,
-      32,
-      16,
-      64,
-      0x4169a1
+    this.textPrompt = this.scene.add.dom(
+      x + width / 2 - padding * 2,
+      y + height / 2 - padding * 2,
+      "div",
+      "width: 0; height: 0; border-style: solid; border-width: 1em 0.5em 0 0.5em; border-color: #007bff transparent transparent transparent;",
+      ""
     );
-    this.add(this.textPrompt);
-    this.scene.tweens.add({
-      targets: this.textPrompt,
-      yoyo: true,
-      alpha: 0.2,
-      repeat: -1,
-      duration: 800,
-    });
-    this.textPrompt.setOrigin(0, 0.5);
+    this.textPrompt.setPerspective(1000);
+    this.textPrompt.rotate3d.set(0, 1, 0, 0);
     this.textPrompt.setVisible(false);
+
+    this.scene.tweens.add({
+      targets: this.textPrompt.rotate3d,
+      w: 180,
+      duration: 800,
+      ease: "linear",
+      repeat: -1,
+    });
   }
 
   // Sets the text for the dialog window
