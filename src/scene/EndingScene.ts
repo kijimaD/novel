@@ -6,7 +6,7 @@ export class EndingScene extends Phaser.Scene {
   create() {
     const { width, height } = this.game.canvas;
 
-    this.add.image(width / 2, height / 2, "logo");
+    this.add.image(width / 2, height / 2, "title");
     this.add
       .text(width / 2, height / 2, "おわり", {
         fontSize: "30px",

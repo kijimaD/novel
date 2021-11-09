@@ -4,7 +4,7 @@ export class LoadingScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("logo", "assets/image/smoke.png");
+    this.load.image("title", "assets/image/smoke.png");
     this.load.image("station", "assets/image/station.png");
     this.load.image("red", "assets/image/red.png");
 
@@ -14,7 +14,6 @@ export class LoadingScene extends Phaser.Scene {
 
   create() {
     const { width, height } = this.game.canvas;
-    this.add.image(width / 2, height / 2, "logo");
     this.add.text(width / 2, height / 2 + 60, "Loading...").setOrigin(0.5);
 
     this.load.on("complete", () => {

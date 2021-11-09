@@ -7,7 +7,7 @@ export class TitleScene extends Phaser.Scene {
     const { width, height } = this.game.canvas;
     const padding = 200;
 
-    this.add.image(width / 2, height / 2, "logo");
+    this.add.image(width / 2, height / 2, "title");
     const targetObj = this.add
       .text(width - padding / 2, height - padding, "忘れ物", {
         fontSize: "30px",
