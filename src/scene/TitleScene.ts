@@ -7,8 +7,10 @@ export class TitleScene extends Phaser.Scene {
     const { width, height } = this.game.canvas;
     const padding = 200;
 
-    this.add.image(width / 2, height / 2, "logo");
-    const targetObj = this.add
+    const background = this.add
+      .image(width / 2, height / 2, "title")
+      .setAlpha(0);
+    const title = this.add
       .text(width - padding / 2, height - padding, "忘れ物", {
         fontSize: "30px",
         fontFamily: "Hiragino Mincho PRO W3",
@@ -16,10 +18,19 @@ export class TitleScene extends Phaser.Scene {
       .setAlpha(0);
 
     this.tweens.add({
-      targets: targetObj,
+      targets: background,
       alpha: 1,
-      duration: 3000,
+      duration: 1000,
       ease: "Power2",
+    });
+
+    this.time.delayedCall(300, () => {
+      this.tweens.add({
+        targets: title,
+        alpha: 1,
+        duration: 2000,
+        ease: "Power2",
+      });
     });
 
     const zone = this.add.zone(width / 2, height / 2, width, height);

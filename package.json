@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "production": "NODE_ENV=production npx webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development",
+    "start": "NODE_ENV=development webpack-dev-server --mode development",
     "fmt": "prettier --write **/*.{js,json,ts}",
     "lint": "eslint src/**/*.ts"
   },
