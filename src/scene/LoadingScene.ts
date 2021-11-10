@@ -1,4 +1,7 @@
 export class LoadingScene extends Phaser.Scene {
+  private icon?: Phaser.GameObjects.Image;
+  private text?: Phaser.GameObjects.Text;
+
   constructor() {
     super("loading");
   }
@@ -16,37 +19,54 @@ export class LoadingScene extends Phaser.Scene {
   create() {
     // this.cameras.main.backgroundColor =
     //    Phaser.Display.Color.HexStringToColor("#ffffff");
+
     const { width, height } = this.game.canvas;
 
-    const kijimad = this.add.image(width / 2, height / 2, 'kijimad')
-    kijimad.setScale(0.5)
-    kijimad.setAlpha(0)
+    this.icon = this.add
+      .image(width / 2, height / 2, "kijimad")
+      .setScale(0.5)
+      .setAlpha(0);
 
-    const text = this.add.text(width / 2 - 20, height / 2 + 60, "kijimaD", {
-      fontSize: "20px",
-      fontFamily: "Hiragino Mincho PRO W3",
-    }).setFill("#ffffff").setAlpha(0);
+    this.text = this.add
+      .text(width / 2 - 20, height / 2 + 60, "kijimaD", {
+        fontSize: "20px",
+        fontFamily: "Hiragino Mincho PRO W3",
+      })
+      .setFill("#ffffff")
+      .setAlpha(0);
 
+    this.text_animation();
+    this.icon_animation();
+    this.transition_delay();
+
+    this.load.start();
+  }
+
+  private text_animation() {
     this.time.delayedCall(400, () => {
       this.tweens.add({
-        targets: text,
+        targets: this.text,
         duration: 400,
         ease: "Power2",
         alpha: 1,
       });
     });
+  }
 
+  private icon_animation() {
     this.tweens.add({
-      targets: kijimad,
+      targets: this.icon,
       duration: 800,
       ease: "Power2",
       alpha: 1,
     });
+  }
 
+  private transition_delay() {
     this.load.on("complete", () => {
       this.time.delayedCall(1600, () => {
         this.tweens.add({
-          targets: [text, kijimad],
+          targets: [this.text, this.icon],
           duration: 1000,
           ease: "Power2",
           alpha: 0,
@@ -56,7 +76,5 @@ export class LoadingScene extends Phaser.Scene {
         });
       });
     });
-
-    this.load.start();
   }
 }
