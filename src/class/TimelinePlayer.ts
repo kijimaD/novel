@@ -1,4 +1,4 @@
-import { Timeline } from "../type/Timeline";
+import { Timeline, TimelineTransitionEvent } from "../type/Timeline";
 import { Choice } from "../type/Choice";
 import { DialogBox } from "./DialogBox";
 
@@ -229,18 +229,7 @@ export class TimelinePlayer {
 
       case "timelineTransition":
         if (timelineEvent.animation) {
-          const duration_ms = 1000;
-          this.scene.tweens.add({
-            targets: [this.backgroundLayer, this.dialogBox],
-            alpha: 0,
-            duration: duration_ms,
-            ease: "Power2",
-          });
-          this.scene.time.delayedCall(duration_ms / 2, () => {
-            this.scene.scene.start("fade", {
-              timelineID: timelineEvent.timelineID,
-            });
-          });
+          this.timelineTransitionAnimation(timelineEvent);
         } else {
           this.scene.scene.restart({ timelineID: timelineEvent.timelineID });
         }
@@ -261,5 +250,20 @@ export class TimelinePlayer {
       default:
         break;
     }
+  }
+
+  private timelineTransitionAnimation(timelineEvent: TimelineTransitionEvent) {
+    const duration_ms = 1000;
+    this.scene.tweens.add({
+      targets: [this.backgroundLayer, this.dialogBox],
+      alpha: 0,
+      duration: duration_ms,
+      ease: "Power2",
+    });
+    this.scene.time.delayedCall(duration_ms / 2, () => {
+      this.scene.scene.start("fade", {
+        timelineID: timelineEvent.timelineID,
+      });
+    });
   }
 }
