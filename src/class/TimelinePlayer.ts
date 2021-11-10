@@ -39,8 +39,8 @@ export class TimelinePlayer {
       height
     );
 
-    this.setMouses();
-    this.setKeyboards();
+    this.loadMouses();
+    this.loadKeyboards();
 
     this.uiLayer.add(this.hitArea);
   }
@@ -51,7 +51,7 @@ export class TimelinePlayer {
     this.next();
   }
 
-  private setMouses() {
+  private loadMouses() {
     this.hitArea.setInteractive({
       useHandCursor: true,
     });
@@ -62,7 +62,7 @@ export class TimelinePlayer {
     });
   }
 
-  private setKeyboards() {
+  private loadKeyboards() {
     // A でdialog boxをトグル
     this.keyA.on("down", () => {
       this.fullImage();
