@@ -4,9 +4,6 @@ export class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    this.cameras.main.backgroundColor =
-      Phaser.Display.Color.HexStringToColor("#ffffff");
-
     const { width, height } = this.game.canvas;
     const padding = 200;
 
