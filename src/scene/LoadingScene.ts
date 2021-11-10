@@ -1,3 +1,5 @@
+declare const NODE_ENV: string;
+
 export class LoadingScene extends Phaser.Scene {
   private icon?: Phaser.GameObjects.Image;
   private text?: Phaser.GameObjects.Text;
@@ -17,9 +19,6 @@ export class LoadingScene extends Phaser.Scene {
   }
 
   create() {
-    // this.cameras.main.backgroundColor =
-    //    Phaser.Display.Color.HexStringToColor("#ffffff");
-
     const { width, height } = this.game.canvas;
 
     this.icon = this.add
@@ -43,7 +42,7 @@ export class LoadingScene extends Phaser.Scene {
   }
 
   private text_animation() {
-    this.time.delayedCall(400, () => {
+    this.time.delayedCall(200, () => {
       this.tweens.add({
         targets: this.text,
         duration: 400,
@@ -56,7 +55,7 @@ export class LoadingScene extends Phaser.Scene {
   private icon_animation() {
     this.tweens.add({
       targets: this.icon,
-      duration: 800,
+      duration: 400,
       ease: "Power2",
       alpha: 1,
     });
@@ -64,14 +63,14 @@ export class LoadingScene extends Phaser.Scene {
 
   private transition_delay() {
     this.load.on("complete", () => {
-      this.time.delayedCall(1600, () => {
+      this.time.delayedCall(800, () => {
         this.tweens.add({
           targets: [this.text, this.icon],
           duration: 1000,
           ease: "Power2",
           alpha: 0,
         });
-        this.time.delayedCall(1000, () => {
+        this.time.delayedCall(800, () => {
           this.scene.start("title");
         });
       });

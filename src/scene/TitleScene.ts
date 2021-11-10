@@ -24,11 +24,11 @@ export class TitleScene extends Phaser.Scene {
       ease: "Power2",
     });
 
-    this.time.delayedCall(1000, () => {
+    this.time.delayedCall(300, () => {
       this.tweens.add({
         targets: title,
         alpha: 1,
-        duration: 3000,
+        duration: 2000,
         ease: "Power2",
       });
     });
