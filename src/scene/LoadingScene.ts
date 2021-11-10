@@ -38,6 +38,10 @@ export class LoadingScene extends Phaser.Scene {
     this.icon_animation();
     this.transition_delay();
 
+    if (NODE_ENV == 'development') {
+      this.scene.start("title");
+    }
+
     this.load.start();
   }
 
