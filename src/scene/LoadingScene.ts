@@ -16,6 +16,18 @@ export class LoadingScene extends Phaser.Scene {
 
     this.load.audio("train", "assets/sound/train.mp3");
     this.load.audio("lock_click", "assets/sound/lock_click.wav");
+
+    this.load.webfont(
+      "Open Sans",
+      "https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+    );
+    this.load.webfont(
+      {
+        font: "Roboto",
+        variants: ["normal", "100", "700", "700 italic"],
+      },
+      "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,500;1,400;1,700&display=swap"
+    );
   }
 
   create() {
@@ -27,11 +39,12 @@ export class LoadingScene extends Phaser.Scene {
       .setAlpha(0);
 
     this.text = this.add
-      .text(width / 2 - 20, height / 2 + 60, "kijimaD", {
+      .text(width / 2 + 40, height / 2 + 60, "kijimaD", {
         fontSize: "20px",
-        fontFamily: "Hiragino Mincho PRO W3",
+        fontFamily: "Roboto",
+        fontStyle: "700 Italic",
       })
-      .setFill("#ffffff")
+      .setFill("#00ff7f")
       .setAlpha(0);
 
     this.text_animation();

@@ -1,4 +1,5 @@
 import * as Phaser from "phaser";
+import { WebFontLoaderPlugin } from "phaser3-webfont-loader";
 import { Scenes } from "./scene";
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -9,6 +10,15 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: Scenes,
   dom: {
     createContainer: true,
+  },
+  plugins: {
+    global: [
+      {
+        key: "WebFontLoader",
+        plugin: WebFontLoaderPlugin,
+        start: true,
+      },
+    ],
   },
 };
 
