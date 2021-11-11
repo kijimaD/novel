@@ -13,7 +13,7 @@ export class TitleScene extends Phaser.Scene {
     const title = this.add
       .text(width - padding / 2, height - padding, "忘れ物", {
         fontSize: "30px",
-        fontFamily: "Hiragino Mincho PRO W3",
+        fontFamily: "Zen Antique",
       })
       .setAlpha(0);
 

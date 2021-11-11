@@ -18,15 +18,19 @@ export class LoadingScene extends Phaser.Scene {
     this.load.audio("lock_click", "assets/sound/lock_click.wav");
 
     this.load.webfont(
-      "Open Sans",
-      "https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      "Dela Gothic One",
+      "https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
     );
     this.load.webfont(
       {
-        font: "Roboto",
-        variants: ["normal", "100", "700", "700 italic"],
+        font: "Noto Serif JP",
+        variants: ["normal", "700"],
       },
-      "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,500;1,400;1,700&display=swap"
+      "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap"
+    );
+    this.load.webfont(
+      "Zen Antique",
+      "https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap"
     );
   }
 
@@ -41,8 +45,7 @@ export class LoadingScene extends Phaser.Scene {
     this.text = this.add
       .text(width / 2 + 40, height / 2 + 60, "kijimaD", {
         fontSize: "20px",
-        fontFamily: "Roboto",
-        fontStyle: "700 Italic",
+        fontFamily: "Dela Gothic One",
       })
       .setFill("#00ff7f")
       .setAlpha(0);
@@ -51,7 +54,7 @@ export class LoadingScene extends Phaser.Scene {
     this.icon_animation();
     this.transition_delay();
 
-    if (NODE_ENV == "development") {
+    if (NODE_ENV == "deveopment") {
       this.scene.start("title");
     }
 

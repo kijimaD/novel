@@ -18,7 +18,7 @@ export class FadeScene extends Phaser.Scene {
     const targetObj = this.add
       .text(padding, height - padding * 4, "忘れ物", {
         fontSize: "30px",
-        fontFamily: "Hiragino Mincho PRO W3",
+        fontFamily: "Zen Antique",
       })
       .setAlpha(0);
 

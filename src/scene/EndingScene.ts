@@ -10,7 +10,7 @@ export class EndingScene extends Phaser.Scene {
     this.add
       .text(width / 2, height / 2, "おわり", {
         fontSize: "30px",
-        fontFamily: "Hiragino Mincho PRO W3",
+        fontFamily: "Noto Serif JP",
       })
       .setOrigin(0.5);
 

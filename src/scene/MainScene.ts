@@ -33,8 +33,7 @@ export class MainScene extends Phaser.Scene {
 
     // font
     const textStyle: Phaser.Types.GameObjects.Text.TextStyle = {
-      fontFamily:
-        '"Helvetica Neue", Arial, "Hiragino kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif',
+      fontFamily: "Noto Serif JP",
       fontSize: "24px",
     };
 
