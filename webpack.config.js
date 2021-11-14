@@ -40,7 +40,6 @@ const config = {
     static: {
       directory: path.resolve(__dirname, "dist"),
     },
-    mode: "development",
     host: "0.0.0.0",
     port: 3000,
     open: true,

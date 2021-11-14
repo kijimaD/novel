@@ -33,7 +33,7 @@ type playSoundEvent = {
 };
 
 // タイムライン遷移イベント
-type TimelineTransitionEvent = {
+export type TimelineTransitionEvent = {
   type: "timelineTransition";
   timelineID: string;
   animation?: boolean;

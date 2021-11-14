@@ -16,6 +16,22 @@ export class LoadingScene extends Phaser.Scene {
 
     this.load.audio("train", "assets/sound/train.mp3");
     this.load.audio("lock_click", "assets/sound/lock_click.wav");
+
+    this.load.webfont(
+      "Dela Gothic One",
+      "https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+    );
+    this.load.webfont(
+      {
+        font: "Noto Serif JP",
+        variants: ["normal", "700"],
+      },
+      "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap"
+    );
+    this.load.webfont(
+      "Zen Antique",
+      "https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap"
+    );
   }
 
   create() {
@@ -27,18 +43,18 @@ export class LoadingScene extends Phaser.Scene {
       .setAlpha(0);
 
     this.text = this.add
-      .text(width / 2 - 20, height / 2 + 60, "kijimaD", {
+      .text(width / 2 + 40, height / 2 + 60, "kijimaD", {
         fontSize: "20px",
-        fontFamily: "Hiragino Mincho PRO W3",
+        fontFamily: "Dela Gothic One",
       })
-      .setFill("#ffffff")
+      .setFill("#00ff7f")
       .setAlpha(0);
 
     this.text_animation();
     this.icon_animation();
     this.transition_delay();
 
-    if (NODE_ENV == 'development') {
+    if (NODE_ENV == "deveopment") {
       this.scene.start("title");
     }
 
